@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telegram Bots - Minidu Shashimal</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Particle.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <link rel="shortcut icon" href="telegram.png" type="image/png">
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --secondary: #16213e;
+      --accent: #e94560;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      color: #fff;
+    }
+    
+    /* Particles Background */
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    
+    /* Main Container */
+    .container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      z-index: 2;
+    }
+    
+    /* Title & Tagline */
+    h1 {
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+    }
+    h1 i{
+      font-size: 3rem;
+      margin-left: 15px;
+
+    }
+    
+    p.tagline {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+    
+    /* Card Grid Layout */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      justify-content: center;
+    }
+    
+    /* Card Styling */
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      
+      /* Entrance Animation */
+      opacity: 0;
+      transform: translateY(50px);
+      animation: cardEntrance 0.8s ease forwards;
+    }
+    
+    /* Hover Effect for Card */
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card:hover::before {
+      left: 100%;
+    }
+    
+    /* Animation Delay for Each Card */
+    .card:nth-child(1) { animation-delay: 0.2s; }
+    .card:nth-child(2) { animation-delay: 0.4s; }
+    .card:nth-child(3) { animation-delay: 0.6s; }
+    .card:nth-child(4) { animation-delay: 0.8s; }
+    
+    @keyframes cardEntrance {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Icon Container */
+    .icon-container {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem auto;
+    }
+    
+    .icon-container i {
+      font-size: 1.8rem;
+      color: white;
+    }
+    
+    /* Bot Name & Username */
+    .card h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .card p.bot-username {
+      font-size: 1rem;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+    
+    /* Try Now Button */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .btn i {
+      margin-right: 0.5rem;
+    }
+    
+    .btn:hover {
+      background: #c43e54;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        margin: 0 1rem;
+      }
+    }
+    h1 i{
+      font-size: 2rem;
+      margin-bottom: 10px;
+      margin-left: 0;
+    }
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      h1 i{
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+      margin-left: 0;
+    }
+      .card {
+        padding: 1.5rem;
+      }
+      .icon-container {
+        width: 50px;
+        height: 50px;
+      }
+      .icon-container i {
+        font-size: 1.5rem;
+      }
+      .btn {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+      }
+    }
+    
+    /* Particle.js Canvas Positioning */
+    .particles-js-canvas-el {
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+    
+    /* Footer Styling */
+    footer {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      text-align: center;
+      padding: 1rem;
+      position: relative;
+      z-index: 2;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 0.9rem;
+    }
+    
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      color: white;
+    }
+    
+    /* Floating Telegram Button (Optional) */
+    .telegram-btn {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background-color: var(--accent);
+      color: #fff;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 3;
+      transition: background-color 0.3s;
+      text-decoration: none;
+    }
+    .telegram-btn i {
+      font-size: 3rem;
+    }
+    
+    .telegram-btn:hover {
+      background-color: #c43e54;
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div class="container">
+    <h1>My Telegram Bots <i class="fab fa-telegram-plane"></i></h1>
+    <p class="tagline">Discover our bots designed to enhance your Telegram experience.</p>
+    <div class="card-grid">
+      <!-- Instagram Downloader Card -->
+      <div class="card">
+        <div class="icon-container">
+          <i class="fab fa-instagram"></i>
+        </div>
+        <h2>Instagram Downloader</h2>
+        <p class="bot-username">@igdownloadnew_bot</p>
+        <a href="https://t.me/igdownloadnew_bot" target="_blank" class="btn">
+          <i class="fab fa-telegram-plane"></i> Try Now
+        </a>
+      </div>
+      <!-- Music Identifier Pro Card -->
+      <div class="card">
+        <div class="icon-container">
+          <i class="fas fa-wave-square"></i>
+        </div>
+        <h2>Music Identifier Pro</h2>
+        <p class="bot-username">@TTIDownloader_bot</p>
+        <a href="https://t.me/TTIDownloader_bot" target="_blank" class="btn">
+          <i class="fab fa-telegram-plane"></i> Try Now
+        </a>
+      </div>
+      <!-- IP Address Tracker Card -->
+      <div class="card">
+        <div class="icon-container">
+          <i class="fas fa-map-marked-alt"></i>
+        </div>
+        <h2>IP Address Tracker</h2>
+        <p class="bot-username">@IPAddresstrack_bot</p>
+        <a href="https://t.me/IPAddresstrack_bot" target="_blank" class="btn">
+          <i class="fab fa-telegram-plane"></i> Try Now
+        </a>
+      </div>
+      <!-- File Convertor Card -->
+      <div class="card">
+        <div class="icon-container">
+          <i class="fas fa-file-import"></i>
+        </div>
+        <h2>File Convertor</h2>
+        <p class="bot-username">@fileconvertornew_bot</p>
+        <a href="https://t.me/fileconvertornew_bot" target="_blank" class="btn">
+          <i class="fab fa-telegram-plane"></i> Try Now
+        </a>
+      </div>
+
+      <!-- IP Address Tracker Card -->
+      <div class="card">
+        <div class="icon-container">
+          <i class="fa-brands fa-python"></i>
+        </div>
+        <h2>Python Error Checker</h2>
+        <p class="bot-username">@PythonErrorCheckerbot</p>
+        <a href="https://t.me/PythonErrorCheckerbot" target="_blank" class="btn">
+          <i class="fab fa-telegram-plane"></i> Try Now
+        </a>
+      </div>
+
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 <a href="https://minidushashimal.com" target="_blank">minidushashimal.com</a>. All rights reserved.</p>
+  </footer>
+  
+  <!-- Floating Telegram Button Linking to Your Main Telegram Account -->
+  <a href="https://t.me/miniduonline" target="_blank" class="telegram-btn">
+    <i class="fab fa-telegram-plane"></i>
+  </a>
+  
+  <script>
+    // Particle.js Configuration
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80 },
+        color: { value: '#ffffff' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.5 },
+        size: { value: 3 },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: 'none',
+          random: false,
+          straight: false,
+          out_mode: 'out',
+          bounce: false
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: { enable: true, mode: 'repulse' },
+          onclick: { enable: true, mode: 'push' },
+          resize: true
+        }
+      },
+      retina_detect: true
+    });
+    
+    // Touch Hover Effect for Mobile Devices
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('touchstart', function() {
+        this.classList.add('hover');
+      });
+      
+      card.addEventListener('touchend', function() {
+        setTimeout(() => this.classList.remove('hover'), 500);
+      });
+    });
+  </script>
+</body>
+</html>
